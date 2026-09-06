@@ -30,7 +30,11 @@
   let quesCurentExpend = $state(-1);
 
   function hanndleFaq(index: number) {
-    quesCurentExpend = index;
+    if (quesCurentExpend === index) {
+      quesCurentExpend = -1;
+    } else {
+      quesCurentExpend = index;
+    }
   }
 </script>
 
