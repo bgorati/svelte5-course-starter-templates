@@ -1,3 +1,18 @@
+<script lang="ts">
+  import DownArrow from "$assets/icons/chevron-down.svg";
+  let { faq, isExpanded, ...props } = $props();
+</script>
+
+<button class="container" class:container-expanded={isExpanded} {...props}>
+  <div class="question-and-answer">
+    <p class="question mb-s">{faq.question}</p>
+    <p class="answer">
+      {faq.answer}
+    </p>
+  </div>
+  <img src={DownArrow} alt="down arrow" />
+</button>
+
 <style>
   .container {
     display: flex;
@@ -6,6 +21,7 @@
     padding: 12px 0;
     border-bottom: 1px solid grey;
     text-align: left;
+    width: 100%;
   }
 
   .question-and-answer {
