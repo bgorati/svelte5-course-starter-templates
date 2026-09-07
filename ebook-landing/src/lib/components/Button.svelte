@@ -5,18 +5,23 @@
   let { children, ...props } = $props();
 
   async function handleCheckout() {
-    const stripe = await loadStripe(PUBLIC_STRIPE_KEY);
+    try {
+      const stripe = await loadStripe(PUBLIC_STRIPE_KEY);
 
-    const response = await fetch("/api/checkout", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    const { sessionId } = await response.json();
+      const { sessionId } = await response.json();
 
-    await stripe.redirectToCheckout({ sessionId });
+      await stripe.redirectToCheckout({ sessionId });
+    } catch (err) {
+      // console.error("Checkout Error:", err);
+      goto("/checkout/failure");
+    }
   }
 </script>
 
