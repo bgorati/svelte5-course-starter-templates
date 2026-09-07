@@ -1,8 +1,27 @@
 <script lang="ts">
+  import { loadStripe } from "@stripe/stripe-js";
+  import { PUBLIC_STRIPE_KEY } from "$env/static/public";
+
   let { children, ...props } = $props();
+
+  async function handleCheckout() {
+    const stripe = await loadStripe(PUBLIC_STRIPE_KEY);
+
+    const response = await fetch("/api/checkout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const { sessionId } = await response.json();
+
+    await stripe.redirectToCheckout({ sessionId });
+  }
 </script>
 
-<button {...props}>{@render children()}</button>
+<button {...props} onclick={() => handleCheckout()}>{@render children()}</button
+>
 
 <style>
   button {
