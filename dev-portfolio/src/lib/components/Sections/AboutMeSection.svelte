@@ -1,3 +1,8 @@
+<script lang="ts">
+</script>
+
+<h1>I'm Brahmanand, frontend developer</h1>
+
 <style>
   .content-container {
     display: flex;
