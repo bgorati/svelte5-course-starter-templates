@@ -1,3 +1,25 @@
+<script lang="ts">
+  let { devExperience } = $props();
+  $inspect(devExperience);
+</script>
+
+<div class="work-experience">
+  <div class="work-experience-list">
+    <h2 class="headline">Work Experience</h2>
+    {#each devExperience as work}
+      <div class="work-item">
+        <p class="company-and-date">
+          <span>{work.company}</span>
+          <span>
+            {work.startDate} - {work.endDate}
+          </span>
+        </p>
+        <p>{work.jobTitle}</p>
+      </div>
+    {/each}
+  </div>
+</div>
+
 <style>
   .work-experience {
     display: flex;
